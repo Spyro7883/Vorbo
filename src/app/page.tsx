@@ -1,5 +1,6 @@
 "use client"
 import { useState } from "react";
+import RegisterPopup from "./RegisterPopup";
 
 export default function Home() {
   const [showLoginPopup, setShowLoginPopup] = useState(false);
@@ -15,10 +16,11 @@ export default function Home() {
       <main className="flex min-h-screen flex-col items-center justify-between p-24">
         <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
           <section>
-            <button onClick={() => setShowLoginPopup(true)}>Login</button>
-            <button onClick={() => setShowRegisterPopup(true)}>Register</button>
-          </section>
+            {/* <button onClick={() => setShowLoginPopup(true)}>Login</button> */}
+            <button onClick={() => setShowRegisterPopup(!showRegisterPopup)}>Register</button>
 
+          </section>
+          {showRegisterPopup ? <RegisterPopup /> : <></>}
         </div>
       </main>
       <footer />
