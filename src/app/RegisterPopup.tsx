@@ -13,7 +13,7 @@ const RegisterPopup = () => {
     const { register, handleSubmit } = useForm<FormRegisterSchema>()
     const onSubmit: SubmitHandler<FormRegisterSchema> = async (data) => {
         try {
-            const response = await fetch('/api/register', {
+            const response = await fetch('/createUser', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
