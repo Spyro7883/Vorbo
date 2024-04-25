@@ -1,4 +1,5 @@
 
+require("dotenv").config()
 import React from "react"
 import { useForm, SubmitHandler } from "react-hook-form"
 
@@ -13,18 +14,19 @@ const RegisterPopup = () => {
     const { register, handleSubmit } = useForm<FormRegisterSchema>()
     const onSubmit: SubmitHandler<FormRegisterSchema> = async (data) => {
         try {
-            const response = await fetch('/createUser', {
+            const response = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/createUser`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data),
             });
-            const responseData = await response.json();
             if (response.ok) {
+                const responseData = await response.json();
                 console.log(responseData);
             } else {
-                console.error(responseData.message);
+                const errorText = await response.text();
+                console.error('Error response text:', errorText);
             }
         } catch (error) {
             console.error('An error occurred:', error);
