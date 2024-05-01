@@ -1,4 +1,5 @@
-require("dotenv").config()
+require('dotenv').config();
+require('dotenv').config({ path: `./.env.${process.env.NODE_ENV}` });
 const express = require('express')
 const mysql = require('mysql')
 const bcrypt = require('bcrypt')
@@ -24,15 +25,15 @@ app.use(cors());
 app.use(express.json())
 
 app.post("/createUser", async (req, res) => {
-    const user = req.body.name;
+    const username = req.body.name;
     const email = req.body.email;
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     db.getConnection(async (err, connection) => {
         if (err) throw (err)
-        const sqlSearch = "SELECT * FROM user_table WHERE user = ?"
-        const search_query = mysql.format(sqlSearch, [user])
-        const sqlInsert = "INSERT INTO user_table VALUES (0,?,?,?)"
-        const insert_query = mysql.format(sqlInsert, [user, email, hashedPassword])
+        const sqlSearch = "SELECT * FROM user_table WHERE username = ?"
+        const search_query = mysql.format(sqlSearch, [username])
+        const sqlInsert = "INSERT INTO user_table (username, email, password) VALUES (?,?,?)"
+        const insert_query = mysql.format(sqlInsert, [username, email, hashedPassword])
         await connection.query(search_query, async (err, result) => {
             if (err) throw (err)
             console.log("------> Search Results")
