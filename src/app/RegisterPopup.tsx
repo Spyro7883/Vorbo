@@ -14,7 +14,7 @@ const RegisterPopup = () => {
     const { register, handleSubmit } = useForm<FormRegisterSchema>()
     const onSubmit: SubmitHandler<FormRegisterSchema> = async (data) => {
         try {
-            const response = await fetch(`https://${process.env.NEXT_PUBLIC_IP}:${process.env.NEXT_PUBLIC_PORT}/createUser`, {
+            const response = await fetch(`http://${process.env.NEXT_PUBLIC_IP}:${process.env.NEXT_PUBLIC_PORT}/createUser`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
