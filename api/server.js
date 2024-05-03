@@ -21,7 +21,9 @@ db.getConnection((err, connection) => {
 })
 
 
-app.use(cors());
+app.use(cors({
+    origin: 'https://vorbo-registration.vercel.app'
+}));
 app.use(express.json())
 
 app.post("/createUser", async (req, res) => {
