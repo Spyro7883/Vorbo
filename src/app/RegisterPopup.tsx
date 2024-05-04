@@ -14,7 +14,7 @@ const RegisterPopup = () => {
     const { register, handleSubmit } = useForm<FormRegisterSchema>()
     const onSubmit: SubmitHandler<FormRegisterSchema> = async (data) => {
         try {
-            const response = await fetch(`https://${process.env.NEXT_PUBLIC_IP}:${process.env.NEXT_PUBLIC_PORT}/createUser`, {
+            const response = await fetch(`http://${process.env.NEXT_PUBLIC_IP}:${process.env.NEXT_PUBLIC_PORT}/createUser`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -34,13 +34,13 @@ const RegisterPopup = () => {
     };
 
     return (
-        <section>
-            <h1>Registration Page</h1>
-            <form method="post" className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
-                <input type="text" placeholder="Name" {...register("name")} />
-                <input type="email" placeholder="Email" {...register("email")} />
-                <input type="password" placeholder="Password" {...register("password")} />
-                <button type="submit">Submit</button>
+        <section className="max-w-56 border-2 rounded-lg bg-white pb-2 pt-2">
+            <h1 className="flex justify-center pb-2 text-black">User Registration</h1>
+            <form method="post" className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
+                <input className="bg-transparent outline-none text-black px-6" type="text" placeholder="Name" {...register("name")} />
+                <input className="bg-transparent outline-none text-black px-6" type="email" placeholder="Email" {...register("email")} />
+                <input className="bg-transparent outline-none text-black px-6" type="password" placeholder="Password" {...register("password")} />
+                <button className="text-black" type="submit">Submit</button>
             </form>
         </section>
     );
