@@ -24,7 +24,7 @@ db.getConnection((err, connection) => {
 app.use(cors({}));
 app.use(express.json())
 
-app.post("/createUser", async (req, res) => {
+app.post("/api/proxy", async (req, res) => {
     const username = req.body.name;
     const email = req.body.email;
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
